@@ -16,3 +16,7 @@ function draw() {
   //Kalder på funktionen der skriver tiden
   drawTime();
 }
+
+function keyReleased(){
+  hours++
+}
