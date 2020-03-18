@@ -33,7 +33,7 @@ function updateTime() {
   if(minutes>59){
     minutes=0;
     hours++;
-  } else if (hours==18){
+  } else if (hours>=18){
     hours=0;
     days++;
   }
