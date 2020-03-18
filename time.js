@@ -33,6 +33,7 @@ function updateTime() {
   if(minutes>59){
     minutes=0;
     hours++;
+    //Når der er gået 18 timer så bliver det en ny dag
   } else if (hours>=18){
     hours=0;
     days++;
