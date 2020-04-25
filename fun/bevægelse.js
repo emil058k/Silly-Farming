@@ -44,6 +44,7 @@ function movement() {
     }
 }
 
+
 function limits() {
   //Hvis spilleren rammer højre eller venstre side af canvas,
   //så tegnes de ved kanten igen.
@@ -56,21 +57,26 @@ function limits() {
   }
 }
 
+
 function stairs() {
   //når funktion kaldes så laver den boolean 'onStairs'
   let onStairs = false
 
-  //hvis spilleren er 
-  if (player.position.x >= 677+25 & player.position.x <= 750+60 & player.position.y <= 540-140/2){
+
+// & player.position.y <= 540-140/2
+
+  //hvis spilleren står ved trappen så er de på trappen og går ned 
+  if (player.position.x >= 677+25 & player.position.x <= 750+60){
     onStairs = true
-    if (keyIsDown(RIGHT_ARROW) & player.position.y <=540) {
+
+    //ned
+    if (keyIsDown(RIGHT_ARROW) & player.position.y <= 540-140/2) {
       player.position.y = player.position.y+1.25;
+    }
+
+    //op
+    if (keyIsDown(LEFT_ARROW) & player.position.y >= 480-140/2) {
+      player.position.y = player.position.y-1.24;
     }
   }
 }
-
-  if (player.position.x < 750) {
-    if (keyIsDown(LEFT_ARROW)) {
-      player.position.y = player.position.y-1;
-    }
-  }

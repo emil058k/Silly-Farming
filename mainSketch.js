@@ -4,12 +4,15 @@ let days = 0;
 
 //Hvilken tilstand programmet er i feks. "menu" mode eller "game" mode
 let mode = 0;
-let imageBG;
-let dirt;
+
+//Hvilken scene 
+let scene = 0;
+
 
 //Preloader billederne så der ikke er delay.
 function preload(){
-  imageBG = loadImage("image/background3.png");
+  house = loadImage("image/background3.png");
+  
   dirt = loadImage("image/Dirt.png");
 }
 
@@ -27,51 +30,31 @@ function draw() {
 
   //Menuen
   if (mode == 0) {
-    //I menuen sættes timeren til nul, for den tæller nemlig hele tiden
-    minutes, hours, days = 0;
-
-    //Knappen
-    background(180);
-
-    //Hover effect. Når markøren er over knappen så skifter baggrunden.
-    if (mode == 0 && mouseX >= 300 && mouseX <= 500 && mouseY >= 336 && mouseY <= 386) {
-      background(150);
-    }
-
-    //Selve knappen
-    rectMode(CENTER);
-    noStroke();
-    rect(width / 2, height / 5 * 3, 200, 50)
+    //Menu 'funktionen'
+    menu();
   }
 
   //Spil
   else if (mode == 1) {
-    image(imageBG,0,0,);
-    textSize(35);
-
-    //Kalder på funktionen der skriver tiden
-    drawTime();
-
-    //Når timeren når over 18 så går det videre til game over
-    if (hours > 18) {
-      mode++
+    if (scene == 0){
+      image(house,0,0,);
     }
-    drawSprites();
-    movement();
-    limits();
-    stairs();
-    image(dirt,0,0)
-  }
+      else if(scene == 0){
 
+      }
+
+    //spil 'funktionen'
+    game();
+  }
+  
   //Game over
   else if (mode == 2) {
-    background(0);
-
-    //Genstartknappen
-    rect(width - 200, height - 50, 200, 50)
+    //spillet der slutter 'funktionen'
+    gameOver();
   }
 }
 
+//Menu knappen
 function mouseClicked() {
   //'Klik-området' for knappen i menuen
   if (mode == 0 && mouseX >= 300 && mouseX <= 500 && mouseY >= 336 && mouseY <= 386) {
