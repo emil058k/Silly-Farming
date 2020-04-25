@@ -4,13 +4,22 @@ let days = 0;
 
 //Hvilken tilstand programmet er i feks. "menu" mode eller "game" mode
 let mode = 0;
+let imageBG;
+let dirt;
+
+//Preloader billederne så der ikke er delay.
+function preload(){
+  imageBG = loadImage("image/background3.png");
+  dirt = loadImage("image/Dirt.png");
+}
 
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(900, 600);
   background(120);
   //setInterval er en funktion der egentlig bare er en timer
   //For hver 1000 milisekund, så kalder den på updateTime funktionen
   setInterval(updateTime, 1000);
+  player = createSprite(520+100/2,480-140/2,100,140);
 }
 
 function draw() {
@@ -37,7 +46,7 @@ function draw() {
 
   //Spil
   else if (mode == 1) {
-    background(120);
+    image(imageBG,0,0,);
     textSize(35);
 
     //Kalder på funktionen der skriver tiden
@@ -47,6 +56,11 @@ function draw() {
     if (hours > 18) {
       mode++
     }
+    drawSprites();
+    movement();
+    limits();
+    stairs();
+    image(dirt,0,0)
   }
 
   //Game over
