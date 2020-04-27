@@ -1,3 +1,6 @@
+//Uret i højre hjørne
+
+//Den funktion der skriver tiden
 function drawTime() {
   //Ikke angivet globalt da den kun bruges her
   let time;
@@ -21,12 +24,15 @@ function drawTime() {
   else {
     time = '0' + hours + time;
   }
-
-  text(time, 650, 40)
-  text(days, 590, 40)
+  //indstillingerne for min tekst
+  fill(119, 89, 73);
+  textFont(pixel);
+  textSize(35);
+  text(time, 800, 40)
+  text(days, 750, 40)
 }
 
-
+//Den funktion der tæller tiden
 function updateTime() {
   //Når updateTime kaldes på så læg 1 til minutter
   minutes++;
