@@ -1,6 +1,7 @@
 let minutes = 0;
 let hours = 0;
 let days = 0;
+let clouds = 0;
 
 //Hvilken tilstand programmet er i feks. "menu" mode eller "game" mode
 let mode = 0;
@@ -18,6 +19,7 @@ function preload() {
     setting[z] = loadImage("image/background" + [z] + ".png");
   }
   /* cloudsAnimation = loadAnimation("image/Clouds/Cloud-kopi1.png", "image/Clouds/Cloud-kopi54.png") */
+  clouds = loadAnimation("image/Clouds/Cloud-kopi1.png", "image/Clouds/Cloud-kopi54.png")
   dirt = loadImage("image/Dirt.png");
 }
 
@@ -53,6 +55,7 @@ function draw() {
     //spillet der slutter 'funktionen'
     gameOver();
   }
+  animation(clouds, 0, 0);
 }
 
 //Menu knappen

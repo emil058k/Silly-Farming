@@ -44,7 +44,7 @@ function game() {
   if (house == true) {
     stairs();
   }
-  image(dirt, 0, 0)
+  image(dirt, 0, 0);
   drawSprites();
 }
 
