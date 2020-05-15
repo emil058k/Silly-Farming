@@ -1,6 +1,7 @@
 //De forskellige 'modes' spillet er i. Menuen, spil delen og gameover.
 
 function menu() {
+  clouds.visible = false;
   //Når start trykkes er timeren nul, for den tæller nemlig hele tiden
   minutes = 0;
   hours = 0;
@@ -24,6 +25,8 @@ function menu() {
 
 
 function game() {
+  clouds.visible = true;
+
   //Dagen starter kl. 6
   hours = 6;
 
@@ -34,8 +37,9 @@ function game() {
   //Hvis ikke hus, tegnes der ikke hus
   if (house == false) {
     image(setting[4], 0, 0);
-    image(field, 60, 432)
-    image(field)
+    drawSprites(fields)
+    drawSprites(plants)
+    animation(clouds, 450, 300);
   }
 
   //Kalder på funktionen der skriver tiden
@@ -46,19 +50,27 @@ function game() {
     mode++;
   }
 
+
   //alle mine funktioner
   movement();
   sceneChange();
   if (house == true) {
     stairs();
   }
-  drawSprites();
+
+  drawSprite(player);
+
   //Tegner jorden ovenpå mine sprites så græsset går over dem.
   image(dirt, 0, 0);
+  water();
+  sow();
 }
 
 
 function gameOver() {
+  /* removeSprites(plants); */
+
+  clouds.visible = false;
   image(setting[5], 0, 0);
 
   //Genstartknappen
@@ -69,18 +81,14 @@ function gameOver() {
     image(restartH, 672, 540)
   }
 
-  /*  if (mouseX >= 672 && mouseX <= 900 && mouseY >= 540 && mouseY <= 600) {
-     //By-genstartknappen
-     image(restart, 672, 540)
-   }
-   else {
-     //Hus-genstartknappen
-     image(restartH, width - 200, height - 50)
-   } */
-
   //Spilleren sættes tilbage til startposition
   player.position.x = 520 + pW / 2;
   player.position.y = 480 - pH / 2;
+
+  for (r = 0; r < fieldSprite.length; r++) {
+    data.fields[r].sowed = false;
+    data.fields[r].watered = false;
+  }
 
   //Huset tegnes igen som det første
   house = true;

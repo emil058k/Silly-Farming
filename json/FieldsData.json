@@ -1,0 +1,88 @@
+{
+  "fields": [
+    {
+      "name": "field0",
+      "x": 135,
+      "y": 486,
+      "width": 150,
+      "height": 108,
+      "watered": false,
+      "sowed": false,
+      "crops": [
+        {
+          "name": "carrot",
+          "sowed": false,
+          "price": 5
+        },
+        {
+          "name": "Rhubarb",
+          "sowed": false,
+          "price": 15
+        }
+      ]
+    },
+    {
+      "name": "field1",
+      "x": 315,
+      "y": 486,
+      "width": 150,
+      "height": 108,
+      "watered": false,
+      "sowed": false,
+      "crops": [
+        {
+          "name": "carrot",
+          "sowed": false,
+          "price": 5
+        },
+        {
+          "name": "Rhubarb",
+          "sowed": false,
+          "price": 15
+        }
+      ]
+    },
+    {
+      "name": "field2",
+      "x": 585,
+      "y": 486,
+      "width": 150,
+      "height": 108,
+      "watered": false,
+      "sowed": false,
+      "crops": [
+        {
+          "name": "carrot",
+          "sowed": false,
+          "price": 5
+        },
+        {
+          "name": "Rhubarb",
+          "sowed": false,
+          "price": 15
+        }
+      ]
+    },
+    {
+      "name": "field3",
+      "x": 765,
+      "y": 486,
+      "width": 150,
+      "height": 108,
+      "watered": false,
+      "sowed": false,
+      "crops": [
+        {
+          "name": "carrot",
+          "sowed": false,
+          "price": 5
+        },
+        {
+          "name": "Rhubarb",
+          "sowed": false,
+          "price": 15
+        }
+      ]
+    }
+  ]
+}

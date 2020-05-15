@@ -2,6 +2,13 @@ let minutes = 0;
 let hours = 0;
 let days = 0;
 let clouds = 0;
+let fields;
+let plants;
+let fieldSprite = [];
+let carrotSprite = [];
+let rhubarbSprite = [];
+let o = 0;
+let x = 0;
 
 //Player width & player height
 let pW = 150;
@@ -15,8 +22,10 @@ let house = true;
 //baggrunde
 let setting = [];
 
-//Plante-objectet
-let plant;
+//Stadier af vækst hos planterne
+let growthCarrot = [];
+let growthBeet = [];
+
 
 
 //Preloader billederne så der ikke er delay.
@@ -45,15 +54,18 @@ function preload() {
   //jorden, så den kan tegnes foran spilleren
   dirt = loadImage("image/Dirt.png");
   //Markerne
-  field = loadImage("image/field.png");
+  fieldImg = loadImage("image/field.png");
+  fieldWet = loadImage("image/fieldWatered.png");
+
+  //Indlæser billederne for grøntsagerne
+  for (i = 0; i < 5; i++) {
+    growthCarrot[i] = loadImage("image/Carrot" + [i] + ".png");
+    /* growthBeet[i] = loadImage("image/Beet" + [i] + ".png") */
+  }
 
   //Indlæser mine plante objekter og deres animationer
-  data = loadJSON(plants);
-  /*  for (i = 1; i < growthAnimation.length; i++) {
-     growthCarrot = loadImage("image/carrot" + [i] + ".png");
-   }
-   carrot = loadAnimation(data.plants[0].growthAnimation);
-  */
+  data = loadJSON("json/FieldsData.json");
+
 }
 
 //Her tegnes sprites og canvas
@@ -62,13 +74,34 @@ function setup() {
   //setInterval er en funktion der egentlig bare er en timer
   //For hver 1000 milisekund, så kalder den på updateTime funktionen
   setInterval(updateTime, 1000);
+
+  fields = new Group();
+  for (o = 0; o < 4; o++) {
+    fieldSprite[o] = createSprite(data.fields[o].x, data.fields[o].y, data.fields[o].width, data.fields[o].height);
+    fieldSprite[o].addImage("dry", fieldImg);
+    fieldSprite[o].addImage("wet", fieldWet);
+    fields.add(fieldSprite[o]);
+  }
+
+
+  //Spilleren
   player = createSprite(520 + pW / 2, 480 - pH / 2, pW, pH);
   player.addImage("normal", jårhn);
 
+  //Planter
+  plants = new Group();
+  for (x = 0; x < 4; x++) {
+    carrotSprite[x] = createSprite(data.fields[x].x, data.fields[x].y, data.fields[x].width, data.fields[x].height);
+    carrotSprite[x].addImage("0%" + [x], growthCarrot[0]);
+    carrotSprite[x].addImage("25%", growthCarrot[1]);
+    carrotSprite[x].addImage("50%", growthCarrot[2]);
+    carrotSprite[x].addImage("75%", growthCarrot[3]);
+    carrotSprite[x].addImage("100%", growthCarrot[4]);
+    plants.add(carrotSprite[x]);
+  }
+
   clouds.frameDelay = 10;
 
-  /*  fields = new Group();
-   fields.addImage(); */
 
 
 }
@@ -88,9 +121,6 @@ function draw() {
   else if (mode == 1) {
     //spil 'funktionen'
     game();
-    if (house == false) {
-      animation(clouds, 450, 300);
-    }
   }
 
   //Game over
@@ -134,5 +164,6 @@ function keyPressed() {
   //Skift scene
   else if (keyCode == 18) {
     mode++;
+    /* fields.removeSprites(); */
   }
 }
