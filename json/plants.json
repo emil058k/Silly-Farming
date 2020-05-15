@@ -1,0 +1,28 @@
+{
+  "crops": [
+    {
+      "name": "carrot",
+      "growthTime": 1,
+      "x": "2",
+      "watered": false,
+      "growthAnimation": [
+        "image/carrot1.png",
+        "image/carrot2.png",
+        "image/carrot3.png",
+        "image/carrot4.png"
+      ]
+    },
+    {
+      "name": "beet",
+      "growthTime": 2,
+      "x": "2",
+      "watered": false,
+      "growthAnimation": [
+        "image/beet1.png",
+        "image/beet2.png",
+        "image/beet3.png",
+        "image/beet4.png"
+      ]
+    }
+  ]
+}

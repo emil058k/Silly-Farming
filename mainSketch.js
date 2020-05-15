@@ -2,6 +2,8 @@ let minutes = 0;
 let hours = 0;
 let days = 0;
 let clouds = 0;
+
+//Player width & player height
 let pW = 150;
 let pH = 210;
 
@@ -12,6 +14,9 @@ let house = true;
 
 //baggrunde
 let setting = [];
+
+//Plante-objectet
+let plant;
 
 
 //Preloader billederne så der ikke er delay.
@@ -35,10 +40,20 @@ function preload() {
   //Indlæser spillerens udseende
   jårhn = loadImage("image/Jårhn.png")
 
-  /*   clouds = loadAnimation("image/Clouds/Cloud-kopi1.png", "image/Clouds/Cloud-kopi54.png"); */
+  clouds = loadAnimation("image/Clouds/Cloud-kopi1.png", "image/Clouds/Cloud-kopi54.png");
 
   //jorden, så den kan tegnes foran spilleren
   dirt = loadImage("image/Dirt.png");
+  //Markerne
+  field = loadImage("image/field.png");
+
+  //Indlæser mine plante objekter og deres animationer
+  data = loadJSON(plants);
+  /*  for (i = 1; i < growthAnimation.length; i++) {
+     growthCarrot = loadImage("image/carrot" + [i] + ".png");
+   }
+   carrot = loadAnimation(data.plants[0].growthAnimation);
+  */
 }
 
 //Her tegnes sprites og canvas
@@ -48,8 +63,12 @@ function setup() {
   //For hver 1000 milisekund, så kalder den på updateTime funktionen
   setInterval(updateTime, 1000);
   player = createSprite(520 + pW / 2, 480 - pH / 2, pW, pH);
-  player.addImage(jårhn);
+  player.addImage("normal", jårhn);
+
   clouds.frameDelay = 10;
+
+  /*  fields = new Group();
+   fields.addImage(); */
 
 
 }
@@ -70,7 +89,7 @@ function draw() {
     //spil 'funktionen'
     game();
     if (house == false) {
-      /* animation(clouds, 450, 300); */
+      animation(clouds, 450, 300);
     }
   }
 
@@ -107,9 +126,12 @@ function keyPressed() {
     hours++
   }
 
+  //Knap til at skifte modes. KeyCode 18 er option/alt knappen
+  //startforfra
   if (mode == 2 & keyCode == 18) {
     mode = 0;
   }
+  //Skift scene
   else if (keyCode == 18) {
     mode++;
   }

@@ -24,6 +24,9 @@ function menu() {
 
 
 function game() {
+  //Dagen starter kl. 6
+  hours = 6;
+
   //Hvis der er hus, så er der hus
   if (house == true) {
     image(setting[3], 0, 0)
@@ -31,6 +34,8 @@ function game() {
   //Hvis ikke hus, tegnes der ikke hus
   if (house == false) {
     image(setting[4], 0, 0);
+    image(field, 60, 432)
+    image(field)
   }
 
   //Kalder på funktionen der skriver tiden
@@ -48,6 +53,7 @@ function game() {
     stairs();
   }
   drawSprites();
+  //Tegner jorden ovenpå mine sprites så græsset går over dem.
   image(dirt, 0, 0);
 }
 
