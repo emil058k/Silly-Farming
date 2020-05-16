@@ -33,14 +33,20 @@ function game() {
   //Hvis der er hus, så er der hus
   if (house == true) {
     image(setting[3], 0, 0)
+    drawSprite(door);
   }
   //Hvis ikke hus, tegnes der ikke hus
   if (house == false) {
     image(setting[4], 0, 0);
     drawSprites(fields)
-    drawSprites(plants)
+    /* drawSprites(plants) */
     animation(clouds, 450, 300);
+    for (o = 0; o < fields.length; o++) {
+      animation(carrot[o], data.fields[o].x, data.fields[o].y)
+      carrot[o].stop();
+    }
   }
+
 
   //Kalder på funktionen der skriver tiden
   drawTime();
@@ -57,6 +63,7 @@ function game() {
   if (house == true) {
     stairs();
   }
+  playerAni();
 
   drawSprite(player);
 
@@ -88,6 +95,10 @@ function gameOver() {
   for (r = 0; r < fieldSprite.length; r++) {
     data.fields[r].sowed = false;
     data.fields[r].watered = false;
+  }
+
+  for (o = 0; o < fields.length; o++) {
+    carrot[o].changeFrame(0);
   }
 
   //Huset tegnes igen som det første

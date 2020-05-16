@@ -30,6 +30,7 @@ function movement() {
     player.setSpeed(speed, 0);
   }
 
+
   //Realistisk bevægelse. Når en figur bevæger sig har de stadig noget fart på bagefter.
   //'Hvis speed ikke er 0, så...'
   if (speed != 0) {
@@ -90,5 +91,15 @@ function stairs() {
     if (keyIsDown(LEFT_ARROW) & player.position.y >= 480 - pH / 2) {
       player.position.y = player.position.y - 1.25;
     }
+  }
+}
+
+function playerAni() {
+  if (keyIsDown(87)) {
+    player.changeAnimation("watering");
+  } else if (keyIsDown(67)) {
+    player.changeAnimation("sowing");
+  } else {
+    player.changeAnimation("normal");
   }
 }

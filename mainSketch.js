@@ -1,14 +1,13 @@
 let minutes = 0;
 let hours = 0;
 let days = 0;
-let clouds = 0;
-let fields;
-let plants;
+
+//Variablet til afgrøderne.
+let growth = 0;
+
+
+//et array til alle marke-spritesene
 let fieldSprite = [];
-let carrotSprite = [];
-let rhubarbSprite = [];
-let o = 0;
-let x = 0;
 
 //Player width & player height
 let pW = 150;
@@ -22,16 +21,13 @@ let house = true;
 //baggrunde
 let setting = [];
 
-//Stadier af vækst hos planterne
-let growthCarrot = [];
-let growthBeet = [];
-
-
+//Stadier af vækst hos gulerødderne
+let carrot = [];
 
 //Preloader billederne så der ikke er delay.
 function preload() {
   //for loop til at indlæse alle baggrundene med
-  for (z = 1; z <= 5; z++) {
+  for (z = 1; z <= 6; z++) {
     setting[z] = loadImage("image/background" + [z] + ".png");
   }
 
@@ -48,20 +44,28 @@ function preload() {
 
   //Indlæser spillerens udseende
   jårhn = loadImage("image/Jårhn.png")
+  sowingIMG = loadImage("image/sowing.png")
+  wateringIMG = loadImage("image/watering.png")
 
   clouds = loadAnimation("image/Clouds/Cloud-kopi1.png", "image/Clouds/Cloud-kopi54.png");
 
   //jorden, så den kan tegnes foran spilleren
   dirt = loadImage("image/Dirt.png");
+  doorIMG = loadImage("image/door.png");
   //Markerne
   fieldImg = loadImage("image/field.png");
   fieldWet = loadImage("image/fieldWatered.png");
 
   //Indlæser billederne for grøntsagerne
-  for (i = 0; i < 5; i++) {
+  /* for (i = 0; i < 5; i++) {
     growthCarrot[i] = loadImage("image/Carrot" + [i] + ".png");
-    /* growthBeet[i] = loadImage("image/Beet" + [i] + ".png") */
+  } */
+  for (o = 0; o < 4; o++) {
+    carrot[o] = loadAnimation("image/Carrot0.png", "image/Carrot1.png", "image/Carrot2.png", "image/Carrot3.png", "image/Carrot4.png");
   }
+  /* for (u = 0; u < 5; u++) {
+    carrots[u].changeFrame(u);
+  } */
 
   //Indlæser mine plante objekter og deres animationer
   data = loadJSON("json/FieldsData.json");
@@ -75,6 +79,7 @@ function setup() {
   //For hver 1000 milisekund, så kalder den på updateTime funktionen
   setInterval(updateTime, 1000);
 
+  //markerne til afgrøder
   fields = new Group();
   for (o = 0; o < 4; o++) {
     fieldSprite[o] = createSprite(data.fields[o].x, data.fields[o].y, data.fields[o].width, data.fields[o].height);
@@ -83,23 +88,17 @@ function setup() {
     fields.add(fieldSprite[o]);
   }
 
+  //Døren, så den bliver interaktiv
+  door = createSprite(486 + 30 / 2, 480 - 222 / 2, 30, 222)
+  door.addImage(doorIMG);
 
   //Spilleren
   player = createSprite(520 + pW / 2, 480 - pH / 2, pW, pH);
   player.addImage("normal", jårhn);
+  player.addImage("watering", wateringIMG);
+  player.addImage("sowing", sowingIMG);
 
-  //Planter
-  plants = new Group();
-  for (x = 0; x < 4; x++) {
-    carrotSprite[x] = createSprite(data.fields[x].x, data.fields[x].y, data.fields[x].width, data.fields[x].height);
-    carrotSprite[x].addImage("0%" + [x], growthCarrot[0]);
-    carrotSprite[x].addImage("25%", growthCarrot[1]);
-    carrotSprite[x].addImage("50%", growthCarrot[2]);
-    carrotSprite[x].addImage("75%", growthCarrot[3]);
-    carrotSprite[x].addImage("100%", growthCarrot[4]);
-    plants.add(carrotSprite[x]);
-  }
-
+  //Gør sky animationen langsommere.
   clouds.frameDelay = 10;
 
 
@@ -109,6 +108,7 @@ function setup() {
 //Her tegnes de forskellige 'modes'
 function draw() {
   console.log(mouseX, mouseY);
+
 
   //Menuen
   if (mode == 0) {
@@ -151,6 +151,7 @@ function mouseClicked() {
 }
 
 //Knap til at teste timeren
+
 function keyPressed() {
   if (keyCode == ENTER) {
     hours++
@@ -164,6 +165,5 @@ function keyPressed() {
   //Skift scene
   else if (keyCode == 18) {
     mode++;
-    /* fields.removeSprites(); */
   }
 }
