@@ -39,6 +39,9 @@ function preload() {
   restart = loadImage("image/restart.png");
   restartH = loadImage("image/restart2.png");
 
+  //resume knappen
+  resume = loadImage("image/resume.png")
+
   //Indlæser fonten til min tekst
   pixel = loadFont("image/font.ttf")
 
@@ -57,15 +60,9 @@ function preload() {
   fieldWet = loadImage("image/fieldWatered.png");
 
   //Indlæser billederne for grøntsagerne
-  /* for (i = 0; i < 5; i++) {
-    growthCarrot[i] = loadImage("image/Carrot" + [i] + ".png");
-  } */
   for (o = 0; o < 4; o++) {
     carrot[o] = loadAnimation("image/Carrot0.png", "image/Carrot1.png", "image/Carrot2.png", "image/Carrot3.png", "image/Carrot4.png");
   }
-  /* for (u = 0; u < 5; u++) {
-    carrots[u].changeFrame(u);
-  } */
 
   //Indlæser mine plante objekter og deres animationer
   data = loadJSON("json/FieldsData.json");
@@ -101,6 +98,9 @@ function setup() {
   //Gør sky animationen langsommere.
   clouds.frameDelay = 10;
 
+  /*   for (o = 0; o < 4; o++) {
+      growth = data.fields[o].growth;
+    } */
 
 
 }
@@ -123,11 +123,17 @@ function draw() {
     game();
   }
 
-  //Game over
+  //Nat
   else if (mode == 2) {
+    //spil 'funktionen'
+    night();
+  }
+
+
+  //Game over
+  else if (mode == 3) {
     //spillet der slutter 'funktionen'
     gameOver();
-    /* animation(clouds, 450, 300); */
   }
 }
 
@@ -142,9 +148,17 @@ function mouseClicked() {
     mode++
   }
 
+  //Nat - forsæt
+  //'Klik-området' for forsæt knappen
+  if (mode == 2 && mouseX >= 684 && mouseX <= 900 && mouseY >= 540 && mouseY <= 600) {
+    //Når man trykker på genstart går den tilbage til menuen
+    mode = 1;
+    days++;
+  }
+
   //gameover - genstart
   //'Klik-området' for genstart knappen
-  if (mode == 2 && mouseX >= 600 && mouseX <= 800 && mouseY >= 550 && mouseY <= 600) {
+  if (mode == 3 && mouseX >= 672 && mouseX <= 900 && mouseY >= 540 && mouseY <= 600) {
     //Når man trykker på genstart går den tilbage til menuen
     mode = 0;
   }
@@ -153,13 +167,15 @@ function mouseClicked() {
 //Knap til at teste timeren
 
 function keyPressed() {
+
   if (keyCode == ENTER) {
     hours++
   }
 
+
   //Knap til at skifte modes. KeyCode 18 er option/alt knappen
   //startforfra
-  if (mode == 2 & keyCode == 18) {
+  if (mode == 3 & keyCode == 18) {
     mode = 0;
   }
   //Skift scene

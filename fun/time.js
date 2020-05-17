@@ -46,3 +46,4 @@ function updateTime() {
     days++;
   }
 }
+

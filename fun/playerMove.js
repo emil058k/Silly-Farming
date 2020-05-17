@@ -97,7 +97,7 @@ function stairs() {
 function playerAni() {
   if (keyIsDown(87)) {
     player.changeAnimation("watering");
-  } else if (keyIsDown(67)) {
+  } else if (keyIsDown(81)) {
     player.changeAnimation("sowing");
   } else {
     player.changeAnimation("normal");
