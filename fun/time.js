@@ -1,7 +1,8 @@
 //Uret i højre hjørne
 
-//Den funktion der skriver tiden
 function drawTime() {
+  //Den funktion der skriver tiden
+
   //Ikke angivet globalt da den kun bruges her
   let time;
 
@@ -32,8 +33,9 @@ function drawTime() {
   text(days, 750, 40)
 }
 
-//Den funktion der tæller tiden
 function updateTime() {
+  //Den funktion der tæller tiden
+
   //Når updateTime kaldes på så læg 1 til minutter
   minutes++;
   //Når der er gået 60 'minutter' så er der gået 1 time
@@ -41,9 +43,10 @@ function updateTime() {
     minutes = 0;
     hours++;
     //Når der er gået 18 timer så bliver det en ny dag
-  } else if (hours >= 18) {
+    //Men nu står den bare direkte i game funktionen, da det betyder game over
+  } /* else if (hours >= 18) {
     hours = 0;
     days++;
-  }
+  } */
 }
 
